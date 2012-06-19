@@ -1,13 +1,10 @@
-<f:view xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <h:outputText value='&lt;!DOCTYPE html&gt;' escape="false" />
+    <html>
 
-    <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
-        <h:head>
-            <title>${sitename}&#160;&#187;&#160;${title}</title>
+        <head>
+            <title>Sensi&#160;&#187;&#160;${pageTitle}</title>
 
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta http-equiv="Cache-Control" content="no-cache" />
@@ -16,25 +13,32 @@
             <meta http-equiv="Expires" content="Mon, 1 Aug 1999 10:00:00 GMT" />
 
             <!-- Theme -->
-            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/themes/theme.css" />
+            <link type="text/css" rel="stylesheet" href="resources/styles/theme.css" />
             
-            <script type="text/javascript" src="#{request.contextPath}/resources/script/jquery.min.js"></script>
-            <script type="text/javascript" src="#{request.contextPath}/resources/script/bootstrap.min.js"></script>
+            <script type="text/javascript" src="resources/scripts/jquery.min.js"></script>
+            <script type="text/javascript" src="resources/scripts/bootstrap.min.js"></script>
             <!-- Customization -->
-            <script type="text/javascript" src="#{request.contextPath}/resources/script/application.js"></script>
+            <script type="text/javascript" src="resources/scripts/application.js"></script>
 
             <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-            <ui:insert name="head"></ui:insert>
-        </h:head>
-        <h:body>
-            <ui:insert name="topbar">
-            </ui:insert>
+			<link rel="icon" href="resources/images/icon/icon.gif" />
+            <link rel="shortcut icon" type="image/x-icon" href="resources/images/icon/icon.gif" />
+        </head>
+        <body>
+        	<div class="navbar navbar-fixed-top">
+     			<div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="#">Sensi</a>
+                        <tiles:insertAttribute name="topnav" />
+                    </div>
+				</div>
+			</div>
             <div class="container">
-                <ui:insert name="container">
-                </ui:insert>
+            	<tiles:insertAttribute name="sidebar" />
+            	<div class="span8" background-color="#2e2e2c">
+            			<tiles:insertAttribute name="content" ignore="false" />
+            	</div>
             </div>
-        </h:body>
+        </body>
     </html>
-
-</f:view>

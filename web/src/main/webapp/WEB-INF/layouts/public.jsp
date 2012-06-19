@@ -1,15 +1,40 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <ui:composition template="yusubscribe.xhtml">
-        <ui:define name="container">
-            <ui:insert name="page">
-            </ui:insert>
-        </ui:define>
-    </ui:composition>
+    <html>
 
-</html>
+        <head>
+            <title>Sensi&#160;&#187;&#160;${pageTitle}</title>
+
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta http-equiv="Cache-Control" content="no-cache" />
+            <meta http-equiv="Cache-Control" content="must-revalidate" />
+            <meta http-equiv="Pragma" content="no-cache" />
+            <meta http-equiv="Expires" content="Mon, 1 Aug 1999 10:00:00 GMT" />
+
+            <!-- Theme -->
+            <link type="text/css" rel="stylesheet" href="resources/styles/theme.css" />
+            
+            <script type="text/javascript" src="resources/scripts/jquery.min.js"></script>
+            <script type="text/javascript" src="resources/scripts/bootstrap.min.js"></script>
+            <!-- Customization -->
+            <script type="text/javascript" src="resources/scripts/application.js"></script>
+
+            <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+			<link rel="icon" href="resources/images/icon/icon.gif" />
+            <link rel="shortcut icon" type="image/x-icon" href="resources/images/icon/icon.gif" />
+        </head>
+        <body>
+        	<div class="navbar navbar-fixed-top">
+     			<div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="#">Sensi</a>
+                    </div>
+				</div>
+			</div>
+            <div class="container">
+            	<tiles:insertAttribute name="content" ignore="false" />
+            </div>
+        </body>
+    </html>

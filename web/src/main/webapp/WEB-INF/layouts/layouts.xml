@@ -5,7 +5,15 @@
 
 <tiles-definitions>
 
-    <definition name="main" template="/WEB-INF/layouts/main.jsp">
+    <definition name="main" template="/WEB-INF/layouts/template.jsp">
     </definition>
-
+    
+    <definition name="template" extends="main" >
+    	<put-attribute name="topnav" value="/WEB-INF/layouts/topnav.jsp" />    	
+    	<put-attribute name="sidebar" value="/WEB-INF/layouts/sidebar.jsp" />
+    </definition>
+    
+    <definition name="public" template="/WEB-INF/layouts/public.jsp" >
+    </definition>
+ 
 </tiles-definitions>
