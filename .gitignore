@@ -1,0 +1,15 @@
+#maven directories
+*target/
+*classes/
+*lib/
+
+# eclipse
+.settings
+.classpath
+.project
+
+# server
+*sun-web.xml
+
+# netbeans
+*.NavData

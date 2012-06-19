@@ -1,0 +1,262 @@
+body {
+    background-color: #FFFFFF;
+    background-image: url("../img/bg.jpg");
+    background-position: 0 45px;
+    background-repeat: repeat-x;
+    overflow-y: auto;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.navbar-inner {
+    min-height: 43px;
+}
+
+.page-container {
+    bottom: 0;
+    left: 0;
+    display: block;
+    max-height: 750px;
+    min-height: 545px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.login-body{
+    background-image: none;
+}
+
+.navbar .brand {
+    font-weight: bold !important;
+}
+
+.nav .account-summary {
+    margin-bottom: 0;
+    min-height: 32px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.account-summary-small .content {
+    margin-left: 42px;
+}
+
+.nav .account-summary .content {
+    line-height: 14px;
+    margin-right: 0;
+    margin-top: 1px;
+    padding-right: 15px;
+}
+
+.nav .account-summary .avatar {
+    box-shadow: none;
+    left: 22px;
+    top: 5px;
+}
+
+.account-summary .avatar {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.nav .current-user .fullname {
+    font-size: 13px;
+}
+
+.fullname {
+    color: #333333;
+    font-weight: bold;
+}
+
+.nav .current-user .metadata {
+    display: block;
+    font-size: 11px;
+}
+
+.account-summary .account-group-inner, .account-summary .metadata {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav small {
+    font-weight: normal;
+}
+
+.username, .time, .time a, .metadata, .metadata a {
+    color: #999999;
+    font-size: 12px;
+}
+
+small {
+    font-size: 12px;
+}
+
+.dropdown-menu {
+    border-style: solid;
+}
+
+.dropdown-menu li {
+    display: block;
+    float: none;
+}
+
+.dropdown-divider {
+    border-bottom: 1px solid #DDDDDD;
+    margin: 5px 1px 6px;
+    padding-top: 1px;
+}
+
+.size32 {
+    border-radius: 4px 4px 4px 4px;
+    height: 32px;
+    width: 32px;
+}
+
+.size28 {
+    border-radius: 4px 4px 4px 4px;
+    height: 28px;
+    width: 28px;
+}
+
+.nav li a > span.caret {
+    margin-top: 5px;
+    margin-left: 3px;
+}
+
+.navbar .new-wrapper{
+    float: left;
+    position: relative;
+    padding-right: 3px;
+}
+
+.dropdown-toggle .caret {
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
+    border-top: 4px solid #777777;
+}
+
+.container {
+    width : 1024px !important;
+}
+
+.commons {
+    padding-top: 0px;
+}
+
+.sidebar{
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style: none outside none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul.subDrop {
+    display: none;
+    padding: 5px 0;
+}
+
+.sidebar ul.subDrop li {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding: 4px 10px 5px 14px;
+}
+
+.sidebar ul.subDrop li:hover {
+    background-color: #F9F9F9;
+}
+
+.sidebar ul.subDrop li.active {
+    background-color: #F8F8F8;
+}
+
+.sidebar ul.subDrop li a {
+    color: #222222;
+    text-decoration: none;
+}
+
+.sidebar ul.subDrop li a i {
+    padding-right: 3px;
+}
+
+.sidebar ul li{
+    color: #222222;
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+.sidebar ul li figure{
+    margin: 0;
+    opcity: 0.7;
+    padding: 6px 17px;
+}
+
+.sidebar ul li figure:hover{
+    background-color: #F9F9F9;
+    opcity: 1;
+}
+
+.sidebar ul li.active figure{
+    background-color: #F8F8F8;
+    opacity:1;
+}
+
+.sidebar ul li figure a {
+    color: #222222;
+    text-decoration: none;
+}
+
+.sidebar ul li figure i {
+    padding-right: 3px;
+}
+
+.page-header {
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+}
+
+hr {
+    margin: 7px 0;
+}
+
+.message-item .message-people .pic {
+    background-image: url("http://placehold.it/48x48");
+    display: block;
+    float: left;
+    height: 48px;
+    margin-right: 8px;
+    width: 48px;
+}
+
+.message-item .message-people .info {
+    display: block;
+    float: left;
+    margin-top: -3px;
+}
+
+.message-item .message-people .info .name {
+    color: #333333;
+}
+
+.message-item:nth-child(2n) {
+    background-color: #F8F8F8;
+}
+.message-item {
+    padding: 10px 10px 8px 10px;
+}
+.message-item:hover {
+    background-color: #F4F4F4;
+}
+
+.alert-block {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
