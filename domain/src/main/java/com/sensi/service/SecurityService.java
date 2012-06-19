@@ -44,7 +44,7 @@ public interface SecurityService {
 
     public Long countUsers();
 
-    public List<User> findUsersByUsername(String username);
+    public User findUsersByUsername(String username);
 
     public Long countUsersByUsername(String username);
 

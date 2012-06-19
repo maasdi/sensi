@@ -21,8 +21,7 @@ public class SecurityServiceImpl implements SecurityService {
 	private SessionFactory sessionFactory;
 
 	public Long countGroups() {
-		return (Long) sessionFactory.getCurrentSession().createQuery(
-				"select count(o) from Group o").uniqueResult();
+		return (Long) sessionFactory.getCurrentSession().createQuery("select count(o) from Group o").uniqueResult();
 	}
 
 	public Long countGroupsByName(String name) {
@@ -43,8 +42,9 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	public Long countUsersByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!StringUtils.hasText(username))
+			return 0L;
+		return (Long) sessionFactory.getCurrentSession().createQuery("select count(o) from User o where o.username = :username").setString("username", username).uniqueResult();
 	}
 
 	public void delete(Role role) {
@@ -54,52 +54,47 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	public void delete(Group group) {
-		// TODO Auto-generated method stub
-
+		if (group != null && group.getId() != null){
+			sessionFactory.getCurrentSession().delete(group);
+		}
 	}
 
 	public void delete(User user) {
-		// TODO Auto-generated method stub
-
+		if (user != null && user.getId() != null){
+			sessionFactory.getCurrentSession().delete(user);
+		}
 	}
 
 	public Group findGroup(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Group) sessionFactory.getCurrentSession().createQuery("select o from Group o where o.id = :id").setLong("id", id).uniqueResult();
 	}
 
 	public List<Group> findGroups() {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("select o from Group o order by o.id ").list();
 	}
 
 	public List<Group> findGroupsByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("select o from Group o where o.name = :name").setString("name", name).list();
 	}
 
 	public Role findRole(String authority) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Role) sessionFactory.getCurrentSession().createQuery("select o from Role o.authority = :authority").setString("authority", authority).uniqueResult();
 	}
 
 	public List<Role> findRoles() {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("select o from Role o order by o.authority").list();
 	}
 
 	public User findUser(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (User) sessionFactory.getCurrentSession().createQuery("select o from User o where o.id = :id").setLong("id", id).uniqueResult();
 	}
 
 	public List<User> findUsers() {
-		return sessionFactory.getCurrentSession().createQuery("from User o order by o.username").list();
+		return sessionFactory.getCurrentSession().createQuery("select o from User o order by o.username").list();
 	}
 
-	public List<User> findUsersByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findUsersByUsername(String username) {
+		return (User) sessionFactory.getCurrentSession().createQuery("select o from User o where o.username = :username").setString("username", username).uniqueResult();
 	}
 
 	public void save(Role role) {
@@ -107,13 +102,11 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	public void save(Group group) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().saveOrUpdate(group);
 	}
 
 	public void save(User user) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
 	}
 
 }
