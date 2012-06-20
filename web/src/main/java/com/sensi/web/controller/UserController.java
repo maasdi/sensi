@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sensi.service.SecurityService;
 
+/**
+*
+* @author <a href="mailto:maas.dianto@gmail.com">Maas Dianto</a>
+* Jun 19, 2012
+*/
 @Controller
 public class UserController {
 

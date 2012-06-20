@@ -1,10 +1,3 @@
-/**
- * ClassifyResult.java
- *
- * eBio-MOH gateway version 1.0
- * Licensed Material - Property of XYBASE.
- * Copyright (C) 2006 XYBASE SDN BHD. All rights reserved.
- */
 package com.sensi.domain;
 
 /**

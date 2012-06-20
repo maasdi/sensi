@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +23,8 @@ import com.sensi.service.CorpusService;
 
 /**
  * 
- * @author <a href="mailto:maas_dianto@xybase.com">Maas Dianto</a>
- * @version 1.0 - Jun 20, 2012
+ * @author <a href="mailto:maas.dianto@gmail.com">Maas Dianto</a>
+ * Jun 20, 2012
  */
 @Controller
 public class ClassifierController {

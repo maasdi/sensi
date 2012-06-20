@@ -2,8 +2,8 @@ package com.sensi.classification;
 
 /**
  *
- * @author <a href="mailto:maas_dianto@xybase.com">Maas Dianto</a>
- * @version 1.0 - Jun 19, 2012
+ * @author <a href="mailto:maas.dianto@gmail.com">Maas Dianto</a>
+ * Jun 19, 2012
  */
 public class CorpusException extends RuntimeException {
 	

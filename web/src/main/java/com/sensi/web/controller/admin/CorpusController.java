@@ -17,7 +17,7 @@ import com.sensi.service.CorpusService;
 /**
  *
  * @author <a href="mailto:maas_dianto@xybase.com">Maas Dianto</a>
- * @version 1.0 - Jun 20, 2012
+ * Jun 20, 2012
  */
 @Controller
 public class CorpusController {
