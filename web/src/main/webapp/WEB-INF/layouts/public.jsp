@@ -1,8 +1,8 @@
+<!DOCTYPE html>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     <html>
-
         <head>
             <title>Sensi&#160;&#187;&#160;${pageTitle}</title>
 

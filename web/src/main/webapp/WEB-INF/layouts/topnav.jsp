@@ -22,7 +22,7 @@
 			<li>
 				<a class="dropdown-toggle" href="#" data-toggle="dropdown">
 					<span class="new-wrapper"> 
-						<img class="avatar size28" src="resources/images/avatar.jpg" alt="" />
+						<img class="avatar size28" src="<c:url value='/resources/images/avatar.jpg' />" alt="" />
 					</span>
 					<span class="caret"></span>
 				</a>
@@ -32,7 +32,7 @@
 							<div class="content">
 								<div class="account-group account-group-inner">
 									<img class="avatar size32"
-										src="resources/images/avatar.jpg"
+										src="<c:url value='/resources/images/avatar.jpg' />"
 										alt="" /> <b class="fullname">Maaz Yagami</b> <small
 										class="metadata">View my profile page</small>
 								</div>
@@ -40,7 +40,7 @@
 					</a></li>
 					<li class="dropdown-divider"></li>
 					<li><a data-nav="settings" href="#">Settings</a></li>
-					<li><a href="<c:url value="j_spring_security_logout" />">Log Out</a></li>
+					<li><a href="<c:url value="/j_spring_security_logout" />">Log Out</a></li>
 				</ul></li>
 		</ul>
 	</div>

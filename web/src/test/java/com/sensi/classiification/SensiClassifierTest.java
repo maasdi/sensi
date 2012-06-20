@@ -12,13 +12,12 @@ import com.sensi.classification.SensiClassifier;
 import com.sensi.domain.Corpus;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class SensiClassifierTest {
 
     @Test
-    public void testClassifier() {
+    public void testClassifierTest() {
         String[] inputText = {"hey, buy this from me!", "do you want to buy?", "I have a party tonight!", "today it is a nice weather", "you are best", "I have a horse", "you are my friend", "buy, buy, buy!", "it is spring in the air", "do you want to come?"};
         String[] inputClasses = {"spam", "spam", "no spam", "no spam", "spam", "no spam", "no spam", "spam", "no spam", "no spam"};
 
@@ -39,13 +38,18 @@ public class SensiClassifierTest {
         textToClassify.add("you are the best, buy!");
         textToClassify.add("it is spring in the air");
 
-        SensiClassifier sensiClassifier = new SensiClassifier(corpuses);
+        SensiClassifier sensiClassifier = new SensiClassifier(corpuses, "weka.classifiers.trees.J48");
         sensiClassifier.train();
 
         assertEquals(10, corpuses.size());
         assertEquals(6, textToClassify.size());
+        
+        assertTrue(sensiClassifier.getCorpusModel().contains("buy"));
+       
         // must be notnull
         assertNotNull(sensiClassifier.classify(textToClassify));
+        
+        assertTrue(sensiClassifier.classify("you").getCategory().equals("no spam"));
 
     }
 }

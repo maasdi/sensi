@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
+import com.sensi.domain.ClassifyResult;
 import com.sensi.domain.Corpus;
 import weka.classifiers.Evaluation;
 import weka.core.SparseInstance;
@@ -63,8 +65,7 @@ public class SensiClassifier {
      *            the algoritm class name, default value
      *            <i>weka.classifiers.bayes.NaiveBayes</i>
      */
-    public SensiClassifier(final List<Corpus> corpuses,
-            final String algoritmClass) {
+    public SensiClassifier(final List<Corpus> corpuses, final String algoritmClass) {
         this.corpuses = corpuses;
         this.algoritmClass = algoritmClass;
         this.initialize();
@@ -75,7 +76,7 @@ public class SensiClassifier {
      */
     private void initialize() {
         // find unique wordClass
-        HashSet<String> categorySet = new HashSet<String>();
+        Set<String> categorySet = new HashSet<String>();
         // hold text and class
         listText = new ArrayList<String>();
         listClass = new ArrayList<String>();
@@ -87,17 +88,18 @@ public class SensiClassifier {
         // add class '?' as tag for unknown class
         categorySet.add("?");
 
+        String[] categories = (String[]) categorySet.toArray(new String[0]);
         FastVector categoryVector = new FastVector();
-        for (String category : listClass) {
-            categoryVector.addElement(category);
+        for (int i = 0; i < categories.length; i++) {
+            categoryVector.addElement(categories[i]);
         }
         categoryAttribute = new Attribute("category", categoryVector);
 
-        FastVector textVector = new FastVector();
-        for (String text : listText) {
-            textVector.addElement(text);
-        }
+        FastVector textVector = null;
         textAttribute = new Attribute("text", textVector);
+        for (String text : listText) {
+        	textAttribute.addStringValue(text);
+        }
 
         FastVector attributeInfo = new FastVector();
         attributeInfo.addElement(textAttribute);
@@ -107,7 +109,7 @@ public class SensiClassifier {
         datasetInstances.setClass(categoryAttribute);
 
         datasetInstances = populateInstances(listText, listClass, datasetInstances, categoryAttribute, textAttribute);
-
+       
     }
 
     /**
@@ -144,15 +146,15 @@ public class SensiClassifier {
      * @param textToClassify
      *            Collection of words to classify
      */
-    public StringBuffer classify(final List<String> textToClassify) {
-        StringBuffer result = new StringBuffer();
+    public List<ClassifyResult> classify(final List<String> textToClassify) {  
+        List<ClassifyResult> results = new ArrayList<ClassifyResult>();
 
         Instances textInstances = new Instances(datasetInstances);
         textInstances.setClass(categoryAttribute);
 
         List<String> textInModel = new ArrayList<String>();
+       
         int num = 0;
-
         for (int i = 0; i < textToClassify.size(); i++) {
             StringBuffer sb = new StringBuffer();
 
@@ -161,7 +163,7 @@ public class SensiClassifier {
             // check word availability on model
             for (int j = 0; j < splittedText.length; j++) {
                 String text = splittedText[j];
-                if (corpusModel.contains((String) text)) {
+                if (corpusModel.contains(text)) {
                     num++;
                     sb.append(text + " ");
                 }
@@ -183,12 +185,12 @@ public class SensiClassifier {
             Instances textInstancesFiltered = filterInstances(textInstances);
 
             int start = datasetInstances.numInstances();
-            result = getResult(textInstancesFiltered, textToClassify, "classify", start);
+            results = getResult(textInstancesFiltered, textToClassify, "classify", start);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
 
-        return result;
+        return results;
     }
 
     /**
@@ -196,8 +198,8 @@ public class SensiClassifier {
      *
      * @param word, the word to classify
      */
-    public StringBuffer classify(final String textToClassify) {
-        StringBuffer result = new StringBuffer();
+    public ClassifyResult classify(final String textToClassify) throws CorpusException {
+    	ClassifyResult result = new ClassifyResult();
 
         List<String> textToList = new ArrayList<String>();
         textToList.add(textToClassify);
@@ -224,7 +226,7 @@ public class SensiClassifier {
         textInModel.add(sb.toString().trim());
 
         if (num == 0) {
-            throw new CorpusException("Cannot Calssify : text to tlassify didn't contain any  words from the corpuses model.");
+            throw new CorpusException("[CorpusException] Text didn't contain any words from the corpuses model");
         }
 
         try {
@@ -235,7 +237,7 @@ public class SensiClassifier {
             Instances textInstancesFiltered = filterInstances(textInstances);
 
             int start = datasetInstances.numInstances();
-            result = getResult(textInstancesFiltered, textToList, "classify", start);
+            result = (ClassifyResult) getResult(textInstancesFiltered, textToList, "classify", start).get(0);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
@@ -244,7 +246,6 @@ public class SensiClassifier {
     }
 
     private Instances populateInstances(List<String> listText, List<String> listClass, Instances instances, Attribute categoryAttribute, Attribute textAttribute) {
-
         for (int i = 0; i < listText.size(); i++) {
             Instance instance = new Instance(2);
             instance.setValue(textAttribute, listText.get(i));
@@ -300,44 +301,36 @@ public class SensiClassifier {
         return result;
     }
 
-    public StringBuffer getResult(Instances instances, List<String> listText, String type, int start) {
-        StringBuffer sb = new StringBuffer();
+    public List<ClassifyResult> getResult(Instances instances, List<String> listText, String type, int start) {
+        List<ClassifyResult> results = new ArrayList<ClassifyResult>();
 
         try {
-            sb.append("\nRESULT:\n");
-
-            Enumeration enumClasses = categoryAttribute.enumerateValues();
-            sb.append("Class values (in order): ");
-            while (enumClasses.hasMoreElements()) {
-                String classStr = (String) enumClasses.nextElement();
-                sb.append("'" + classStr + "'  ");
-            }
-            sb.append("\n");
-
-            // startIx is a fix for handling text cases
             for (int i = start; i < instances.numInstances(); i++) {
 
                 SparseInstance sparseInst = new SparseInstance(instances.instance(i));
                 sparseInst.setDataset(instances);
-
-                sb.append("\nTesting: '" + listText.get(i - start) + "'\n");
-
-                double correctValue = (double) sparseInst.classValue();
+                
                 double predictedValue = classifier.classifyInstance(sparseInst);
-
-                String predictString = categoryAttribute.value((int) predictedValue) + " (" + predictedValue + ")";
-                sb.append("predicted: '" + predictString);
-                if (!"train".equals(type)) {
-                    String correctString = categoryAttribute.value((int) correctValue) + " (" + correctValue + ")";
-                    String testString = ((predictedValue == correctValue) ? "OK!" : "NOT OK!") + "!";
-                    sb.append("' real class: '" + correctString + "' ==> " + testString);
-                }
-                sb.append("\n");
+                String predictCategory = categoryAttribute.value((int) predictedValue);
+                
+                ClassifyResult result = new ClassifyResult();
+                result.setText(listText.get(i - start));
+                result.setCategory(predictCategory);
+                result.setScore(predictedValue);
+                
+                results.add(result);
             }
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
-
-        return sb;
+        return results;
     }
+    
+    public HashSet getCorpusModel() {
+		return corpusModel;
+	}
+    
+    public Classifier getClassifier() {
+		return classifier;
+	}
 }

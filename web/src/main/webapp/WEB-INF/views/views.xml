@@ -7,6 +7,19 @@
         <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
     </definition>
     
+    <definition extends="template" name="admin/listcorpus">
+    	<put-attribute name="content" value="/WEB-INF/views/admin/listcorpus.jsp"/>
+    </definition>
+    <definition extends="template" name="admin/formcorpus">
+    	<put-attribute name="content" value="/WEB-INF/views/admin/formcorpus.jsp"/>
+    </definition>
+    <definition extends="template" name="listdata">
+    	<put-attribute name="content" value="/WEB-INF/views/listdata.jsp"/>
+    </definition>
+    <definition extends="template" name="result">
+    	<put-attribute name="content" value="/WEB-INF/views/result.jsp"/>
+    </definition>
+    
     <definition extends="public" name="login">
     	<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
     </definition>

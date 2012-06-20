@@ -5,7 +5,13 @@
 		<h3>Sign In</h3>
 	</div>
 	<div id="login-content" class="clearfix">
-		<form id="loginForm" action="j_security_check" method="post" >
+		<form id="loginForm" action="<c:url value='/j_security_check' />" method="post" >
+			<c:if test="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message ne null}">
+				<div class="error">
+					Your login attempt was not successful, try again.<br /> Caused :
+					${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+				</div>
+			</c:if>
 			<fieldset>
 				<div class="control-group">
 					<label class="control-label" for="j_username">Username</label>
