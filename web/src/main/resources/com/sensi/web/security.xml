@@ -11,7 +11,10 @@
 		<intercept-url pattern="/images/**" filters="none" />
 		<intercept-url pattern="/styles/**" filters="none" />
 		<intercept-url pattern="/scripts/**" filters="none" />
-		<intercept-url pattern="/users**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/listdata" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/doclassify" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/home" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<form-login login-page="/login" authentication-failure-url="/login?error=true" default-target-url="/" login-processing-url="/j_security_check" />
 		<logout logout-success-url="/login" />
 	</http>
