@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+<!-- 	<bean id="usersConnectionRepository" -->
+<!-- 		class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository"> -->
+<!-- 		<constructor-arg ref="dataSource" /> -->
+<!-- 		<constructor-arg ref="connectionFactoryLocator" /> -->
+<!-- 		<constructor-arg ref="textEncryptor" /> -->
+
+<!-- 	</bean> -->
+
+<!-- 	<bean id="connectionFactoryLocator" -->
+<!-- 		class="org.springframework.social.connect.support.ConnectionFactoryRegistry"> -->
+<!-- 		<property name="connectionFactories"> -->
+<!-- 			<list> -->
+<!-- 				<bean class="com.sensi.twitter.connect.TwitterConnectionFactory"> -->
+<!-- 					<constructor-arg value="${twitter.consumerKey}" /> -->
+<!-- 					<constructor-arg value="${twitter.consumerSecret}" /> -->
+<!-- 				</bean> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+
+<!-- 	</bean> -->
+
+<!-- 	<bean id="connectionRepository" factory-method="createConnectionRepository" -->
+<!-- 		factory-bean="usersConnectionRepository" scope="request"> -->
+<!-- 		<constructor-arg value="#{request.userPrincipal.name}" /> -->
+
+<!-- 	</bean> -->
+
+<!-- 	<bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" -->
+<!-- 		factory-method="noOpText" /> -->
+
+	<bean id="twitterConnectionFactory" class="com.sensi.twitter.connect.TwitterConnectionFactory" >
+		<constructor-arg value="${twitter.consumerKey}" />
+		<constructor-arg value="${twitter.consumerSecret}" />
+		<constructor-arg value="${twitter.accessTokenKey}" />
+		<constructor-arg value="${twitter.accessTokenSecret}" />
+	</bean>
+
+</beans>

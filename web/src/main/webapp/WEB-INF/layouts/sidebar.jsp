@@ -16,6 +16,12 @@
 				</a>
 			</figure>
 		</li>
+		<li>
+			<figure>
+				<a href="<c:url value='/sensi/tweet' />"> <i class="icon-tweet"></i>Tweet
+				</a>
+			</figure>
+		</li>
 		<security:authorize ifAllGranted="ROLE_ADMIN">
 			<li class="dropper">
 			<figure>

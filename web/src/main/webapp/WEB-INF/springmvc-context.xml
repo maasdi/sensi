@@ -39,13 +39,10 @@
 		Resolves view names to protected .jsp resources within the
 		/WEB-INF/views directory
 	-->
-	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
-		id="tilesViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</bean>
-	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
-		id="tilesConfigurer">
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" id="tilesConfigurer">
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/layouts/layouts.xml</value>
@@ -56,7 +53,7 @@
 		</property>
 	</bean>
 
-	<!-- Forwards requests to the "/" resource to the "hello" view -->
+	<!-- Forwards requests to the "/" resource to the "home" view -->
 	<mvc:view-controller path="/" view-name="home" />
 
 </beans>

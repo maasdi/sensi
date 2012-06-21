@@ -5,7 +5,7 @@
 		<h3>Sign In</h3>
 	</div>
 	<div id="login-content" class="clearfix">
-		<form id="loginForm" action="<c:url value='/j_security_check' />" method="post" >
+		<form id="signinForm" action="<c:url value='/signin/authenticate' />" method="post" >
 			<c:if test="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message ne null}">
 				<div class="error">
 					Your login attempt was not successful, try again.<br /> Caused :

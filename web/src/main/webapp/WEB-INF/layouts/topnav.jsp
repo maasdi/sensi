@@ -13,8 +13,8 @@
 		</a></li>
 	</ul>
 	<div class="pull-right">
-		<form class="navbar-search">
-			<input class="search-query span2" type="text" placeholder="Search" />
+		<form class="navbar-search" action="<c:url value="/sensi/tweet" />">
+			<input class="search-query span2" type="text" name="query" placeholder="Search" />
 			<div class="icon-search icon-white"></div>
 		</form>
 		<ul class="nav">
@@ -40,7 +40,7 @@
 					</a></li>
 					<li class="dropdown-divider"></li>
 					<li><a data-nav="settings" href="#">Settings</a></li>
-					<li><a href="<c:url value="/j_spring_security_logout" />">Log Out</a></li>
+					<li><a href="<c:url value="/signout" />">Log Out</a></li>
 				</ul></li>
 		</ul>
 	</div>

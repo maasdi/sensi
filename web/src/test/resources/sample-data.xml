@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<table name="roles">
+		<column name="roles_id" />
+		<column name="role_name" />
+		<column name="description" />
+		<row>
+			<value description="roles_id">1</value>
+			<value description="role_name">ROLE_ADMIN</value>
+			<value description="description"><![CDATA[Default Role for Administrator]]></value>
+		</row>
+		<row>
+			<value description="roles_id">2</value>
+			<value description="role_name">ROLE_USER</value>
+			<value description="description"><![CDATA[Default Role for Users]]></value>
+		</row>
+	</table>
+	<table name="groups" >
+		<column name="groups_id" />
+		<column name="name" />
+		<row>
+			<value description="groups_id">1</value>
+			<value description="name">GROUP_ADMIN</value>
+		</row>
+		<row>
+			<value description="groups_id">2</value>
+			<value description="name">GROUP_USER</value>
+		</row>
+	</table>
+	<table name="groups_roles">
+		<column name="groups_id" />
+		<column name="authority" />
+		<row>
+			<value description="groups_id">1</value>
+			<value description="authority">1</value>
+		</row>
+		<row>
+			<value description="groups_id">2</value>
+			<value description="authority">2</value>
+		</row>
+	</table>
+	<table name="users">
+		<column name="user_id" />
+		<column name="enabled" />
+		<column name="password" />
+		<column name="salt" />
+		<column name="username" />
+		<column name="_group" />
+		<row>
+			<value description="user_id">-1</value>
+			<value description="enabled">true</value>
+			<value description="password">d033e22ae348aeb5660fc2140aec35850c4da997</value>
+			<value description="salt"></value>
+			<value description="username">admin</value>
+			<value description="_group">1</value>
+		</row>
+		<row>
+			<value description="user_id">-1</value>
+			<value description="enabled">true</value>
+			<value description="password">12dea96fec20593566ab75692c9949596833adc9</value>
+			<value description="salt"></value>
+			<value description="username">user</value>
+			<value description="_group">2</value>
+		</row>
+	</table>
+</dataset>

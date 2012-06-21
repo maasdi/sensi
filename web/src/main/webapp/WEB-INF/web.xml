@@ -7,7 +7,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:com/sensi/**/applicationContext.xml
-             classpath:com/sensi/**/security.xml
+            classpath:com/sensi/**/security.xml
         </param-value>
     </context-param>
      <filter>

@@ -8,7 +8,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<context:property-placeholder location="classpath:jdbc.properties,classpath:social.properties"/>
+	
+	<import resource="social.xml" />
 
 	<tx:annotation-driven/>
 
@@ -36,4 +38,5 @@
             </props>
         </property>
     </bean>
+   
 </beans>

@@ -19,9 +19,12 @@
     <definition extends="template" name="result">
     	<put-attribute name="content" value="/WEB-INF/views/result.jsp"/>
     </definition>
+     <definition extends="template" name="sensi/tweet">
+    	<put-attribute name="content" value="/WEB-INF/views/sensi/tweet.jsp"/>
+    </definition>
     
-    <definition extends="public" name="login">
-    	<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
+    <definition extends="public" name="signin">
+    	<put-attribute name="content" value="/WEB-INF/views/signin.jsp" />
     </definition>
 
 </tiles-definitions>
