@@ -31,7 +31,7 @@ public class Group implements Serializable {
 	private String name;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
-	@JoinTable(name = "groups_authority", joinColumns = { @JoinColumn(name = "groups_id") }, inverseJoinColumns = @JoinColumn(name = "authority"))
+	@JoinTable(name = "groups_roles", joinColumns = { @JoinColumn(name = "groups_id") }, inverseJoinColumns = @JoinColumn(name = "roles_id"))
 	private List<Role> roles = new ArrayList<Role>();
 
 	public Long getId() {

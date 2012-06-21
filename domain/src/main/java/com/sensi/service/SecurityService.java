@@ -35,6 +35,8 @@ public interface SecurityService {
 	
 	/** User */
 	public void save(User user);
+	
+	public void update(User user);
 
     public void delete(User user);
 

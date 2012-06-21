@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -19,6 +20,8 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public Long countGroups() {
 		return (Long) sessionFactory.getCurrentSession().createQuery("select count(o) from Group o").uniqueResult();
@@ -106,7 +109,14 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	public void save(User user) {
-		sessionFactory.getCurrentSession().saveOrUpdate(user);
+		if(passwordEncoder != null){
+			user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
+		}
+		sessionFactory.getCurrentSession().save(user);
+	}
+	
+	public void update(User user){
+		sessionFactory.getCurrentSession().update(user);
 	}
 
 }
