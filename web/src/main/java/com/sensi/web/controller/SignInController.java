@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @Controller
-public class LoginController {
+public class SignInController {
 	
-	Logger logger = LoggerFactory.getLogger(getClass());
+	static final Logger logger = LoggerFactory.getLogger(SignInController.class);
 
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value="/signin", method = RequestMethod.GET)
 	public String loginForm(){
 		logger.info("show login form");
-		return "login";
+		return "signin";
 	}
 	
 }
