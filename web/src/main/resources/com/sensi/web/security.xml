@@ -11,7 +11,8 @@
 		<form-login login-page="/signin" authentication-failure-url="/signin?param.error=true" default-target-url="/" login-processing-url="/signin/authenticate" />
 		<logout logout-success-url="/signin" logout-url="/signout" delete-cookies="JSESSIONID" />
 		<intercept-url pattern="/signin" access="ROLE_ANONYMOUS" />
-		<intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/*" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/sensi/*" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 	</http>
 	

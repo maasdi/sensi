@@ -33,7 +33,7 @@
 <!-- 	<bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" -->
 <!-- 		factory-method="noOpText" /> -->
 
-	<bean id="twitterConnectionFactory" class="com.sensi.twitter.connect.TwitterConnectionFactory" >
+	<bean id="twitterConnectionFactory" class="com.sensi.twitter.connect.TwitterConnectionFactory" scope="singleton" >
 		<constructor-arg value="${twitter.consumerKey}" />
 		<constructor-arg value="${twitter.consumerSecret}" />
 		<constructor-arg value="${twitter.accessTokenKey}" />

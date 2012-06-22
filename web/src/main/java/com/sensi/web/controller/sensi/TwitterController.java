@@ -1,4 +1,4 @@
-package com.sensi.web.controller;
+package com.sensi.web.controller.sensi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class TwitterController {
 			}
 			
 		} catch (Exception ex) {
-			logger.error(ex.getMessage());
+			logger.error(ex.getMessage(), ex.getCause());
 		}
 		return "sensi/tweet";
 	}
@@ -51,7 +51,7 @@ public class TwitterController {
 			}
 			
 		} catch (Exception ex) {
-			logger.error(ex.getMessage());
+			logger.error(ex.getMessage(), ex.getCause());
 		}
 		return "sensi/tweet";
 	}
