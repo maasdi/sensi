@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Index;
@@ -65,7 +66,7 @@ public class User implements UserDetails, Serializable {
 	private String gender;
 	
 	@Column(nullable=false)
-	private boolean enabled;
+	private boolean enabled = true;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	@JoinTable(name = "users_roles", joinColumns = { @JoinColumn(name = "users_id") }, inverseJoinColumns = @JoinColumn(name = "roles_id"))
