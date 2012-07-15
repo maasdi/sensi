@@ -22,5 +22,7 @@ public interface UserService {
     public User findUsersByUsername(String username);
 
     public Long countUsersByUsername(String username);
+    
+    public void createAccount(User user);
 
 }

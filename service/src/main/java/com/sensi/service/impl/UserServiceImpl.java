@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.sensi.domain.User;
+import com.sensi.domain.UserAlreadyExistException;
 import com.sensi.service.UserService;
 
 @Service("userService")
@@ -80,6 +81,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		}else {
 			return (UserDetails) users.get(0);
 		}
+	}
+	
+	@Override
+	public void createAccount(User user) {
+		// check user, if exist throw exeption
+		User userEx = findUsersByUsername(user.getUsername());
+		if(userEx!=null){
+			throw new UserAlreadyExistException("User "+userEx.getUsername()+" already exist");
+		}
+		// else save user
+		save(user);
 	}
 
 }
