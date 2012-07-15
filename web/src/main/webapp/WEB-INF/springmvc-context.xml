@@ -7,8 +7,9 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:component-scan base-package="com.sensi.web.controller">
+	<context:component-scan base-package="com.sensi.web.controller,com.sensi.web.validator">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="javax.annotation.Resource" />
 	</context:component-scan>
 
 	<!-- Configures the @Controller programming model -->
@@ -29,9 +30,8 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Application Message Bundle -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="/WEB-INF/messages/messages" />
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
 		<property name="cacheSeconds" value="0" />
 	</bean>
 
@@ -50,6 +50,11 @@
 				<!-- Scan views directory for Tiles configurations -->
 				<value>/WEB-INF/views/**/views.xml</value>
 			</list>
+		</property>
+		<property name="tilesProperties">
+			<props>
+	            <prop key="org.apache.tiles.evaluator.AttributeEvaluator">org.apache.tiles.evaluator.el.ELAttributeEvaluator</prop>
+	        </props>
 		</property>
 	</bean>
 

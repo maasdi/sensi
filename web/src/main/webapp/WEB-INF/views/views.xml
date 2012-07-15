@@ -24,10 +24,12 @@
     </definition>
     
     <definition extends="public" name="signin">
+    	<put-attribute name="title" expression="${title}" />
     	<put-attribute name="content" value="/WEB-INF/views/signin.jsp" />
     </definition>
     
     <definition extends="public" name="signup">
+    	<put-attribute name="title" expression="${title}" />
     	<put-attribute name="content" value="/WEB-INF/views/signup.jsp" />
     </definition>
 

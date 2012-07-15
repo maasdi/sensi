@@ -4,7 +4,7 @@
     <html>
 
         <head>
-            <title>Sensi&#160;&#187;&#160;${pageTitle}</title>
+            <title>Sensi&#160;&#187;&#160;<tiles:insertAttribute name="title" ignore="true" /></title>
 
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta http-equiv="Cache-Control" content="no-cache" />
@@ -16,6 +16,7 @@
             <link type="text/css" rel="stylesheet" href="<c:url value='/resources/styles/theme.css' />" />
             
             <script type="text/javascript" src="<c:url value='/resources/scripts/jquery.min.js' />"></script>
+            <script type="text/javascript" src="<c:url value='/resources/scripts/jquery.common.js' />"></script>
             <script type="text/javascript" src="<c:url value='/resources/scripts/bootstrap.min.js' />"></script>
             <!-- Customization -->
             <script type="text/javascript" src="<c:url value='/resources/scripts/application.js' />"></script>

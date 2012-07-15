@@ -31,3 +31,6 @@
 		<p>${corpus_error}</p>
 	</div>
 </c:if>
+<script type="text/javascript">
+     APP.InitModule();
+</script>

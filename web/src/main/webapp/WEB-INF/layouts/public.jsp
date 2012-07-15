@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
     <html>
         <head>
-            <title>Sensi&#160;&#187;&#160;${pageTitle}</title>
+            <title>Sensi&#160;&#187;&#160;<tiles:getAsString name="title" ignore="true" /></title>
 
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta http-equiv="Cache-Control" content="no-cache" />
@@ -15,15 +14,16 @@
             <!-- Theme -->
             <link type="text/css" rel="stylesheet" href="resources/styles/theme.css" />
             
-            <script type="text/javascript" src="resources/scripts/jquery.min.js"></script>
-            <script type="text/javascript" src="resources/scripts/bootstrap.min.js"></script>
+            <script type="text/javascript" src="<c:url value='resources/scripts/jquery.min.js' />"></script>
+            <script type="text/javascript" src="<c:url value='/resources/scripts/jquery.common.js' />"></script>
+            <script type="text/javascript" src="<c:url value='resources/scripts/bootstrap.min.js' />"></script>
             <!-- Customization -->
-            <script type="text/javascript" src="resources/scripts/application.js"></script>
+            <script type="text/javascript" src="<c:url value='resources/scripts/application.js' />"></script>
 
             <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-			<link rel="icon" href="resources/images/icon/icon.gif" />
-            <link rel="shortcut icon" type="image/x-icon" href="resources/images/icon/icon.gif" />
+			<link rel="icon" href="<c:url value='resources/images/icon/icon.gif' />" />
+            <link rel="shortcut icon" type="image/x-icon" href="<c:url value='resources/images/icon/icon.gif' />" />
         </head>
         <body>
         	<div class="navbar navbar-fixed-top">

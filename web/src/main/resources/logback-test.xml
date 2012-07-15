@@ -3,11 +3,11 @@
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss} %logger{10} %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <logger name="com.artivisi" level="DEBUG">
+    <logger name="com.sensi" level="DEBUG">
         <appender-ref ref="stdout"/>
     </logger>
 
