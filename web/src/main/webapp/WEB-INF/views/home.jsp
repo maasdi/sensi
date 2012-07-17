@@ -6,13 +6,13 @@
 	</div>
 </div>
 <div class="row-fluid">
-	<form action="<c:url value='/classify' />" method="post" >
+	<form action="<c:url value='/classify' />" method="post">
 		<fieldset>
 			<div class="control-group">
-				<label class="control-label" for="text" ><b>Text to Classify : </b></label>
-				<input type="text" class="input-xlarge" name="text" /> 
+				<label class="control-label" for="text"><b>Text to Classify : </b></label> 
+				<input type="text" class="input-xlarge" name="text" />
 			</div>
-			<div class="form-actions" >
+			<div class="form-actions">
 				<button class="btn btn-primary" type="submit">Classify</button>
 			</div>
 		</fieldset>
@@ -22,8 +22,8 @@
 	<div class="row-fluid">
 		<p>Classify Result :</p>
 		<p>Text : ${result.text}</p>
-		<p>Category : ${result.category} </p>
-		<p>Score : ${result.score} </p>
+		<p>Category : ${result.category}</p>
+		<p>Score : ${result.score}</p>
 	</div>
 </c:if>
 <c:if test="${corpus_error ne null}">
