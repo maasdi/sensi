@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="title" value="Login" />
 <div id="login-container">
 	<div id="login-header">
 		<h3>Sign In</h3>
@@ -37,7 +38,7 @@
 	</div>
 	<div id="login-extra">
 		<p>
-			Don't have an account ? <a href="javascript:void()">Sign Up</a>
+			Don't have an account ? <a href="<c:url value='/signup' />">Create an Account</a>
 		</p>
 		<p>
 			Forgot password ? <a href="#">Retrieve</a>

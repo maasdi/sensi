@@ -4,96 +4,94 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.sensi.domain.Role;
 import com.sensi.domain.User;
-import com.sensi.service.SecurityService;
+import com.sensi.domain.UserAlreadyExistException;
+import com.sensi.service.UserService;
 
-@Service("securityService")
+@Service("userService")
 @Transactional
-public class SecurityServiceImpl implements SecurityService {
-
+public class UserServiceImpl implements UserService, UserDetailsService {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public Long countGroups() {
-		return (Long) sessionFactory.getCurrentSession().createQuery("select count(o) from Group o").uniqueResult();
-	}
-
-	public Long countGroupsByName(String name) {
-		if (!StringUtils.hasText(name))
-			return 0L;
-		return (Long) sessionFactory.getCurrentSession().createQuery(
-				"select count(o) from Group o where o.name like :name")
-				.setString("name", "%" + name + "%").uniqueResult();
-	}
-
-	public Long countRoles() {
-		return (Long) sessionFactory.getCurrentSession().createQuery(
-				"select count(o) from Role o").uniqueResult();
-	}
-
+	@Override
 	public Long countUsers() {
 		return (Long) sessionFactory.getCurrentSession().createQuery("select count(o) from User o").uniqueResult();
 	}
 
+	@Override
 	public Long countUsersByUsername(String username) {
 		if (!StringUtils.hasText(username))
 			return 0L;
 		return (Long) sessionFactory.getCurrentSession().createQuery("select count(o) from User o where o.username = :username").setString("username", username).uniqueResult();
 	}
 
-	public void delete(Role role) {
-		if (role != null && role.getAuthority() != null) {
-			sessionFactory.getCurrentSession().delete(role);
-		}
-	}
-
+	@Override
 	public void delete(User user) {
 		if (user != null && user.getId() != null){
 			sessionFactory.getCurrentSession().delete(user);
 		}
 	}
 
-	public Role findRole(String authority) {
-		return (Role) sessionFactory.getCurrentSession().createQuery("select o from Role o.authority = :authority").setString("authority", authority).uniqueResult();
-	}
-
-	public List<Role> findRoles() {
-		return sessionFactory.getCurrentSession().createQuery("select o from Role o order by o.authority").list();
-	}
-
+	@Override
 	public User findUser(Long id) {
 		return (User) sessionFactory.getCurrentSession().createQuery("select o from User o where o.id = :id").setLong("id", id).uniqueResult();
 	}
 
+	@Override
 	public List<User> findUsers() {
 		return sessionFactory.getCurrentSession().createQuery("select o from User o order by o.username").list();
 	}
 
+	@Override
 	public User findUsersByUsername(String username) {
 		return (User) sessionFactory.getCurrentSession().createQuery("select o from User o where o.username = :username").setString("username", username).uniqueResult();
 	}
 
-	public void save(Role role) {
-		sessionFactory.getCurrentSession().saveOrUpdate(role);
-	}
-
+	@Override
 	public void save(User user) {
 		if(passwordEncoder != null){
 			user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
 		}
 		sessionFactory.getCurrentSession().save(user);
 	}
-	
-	public void update(User user){
+
+	@Override
+	public void update(User user) {
 		sessionFactory.getCurrentSession().update(user);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+		List<User> users = sessionFactory.getCurrentSession().createQuery("select o from User o order by o.username").list();
+		if(users == null || users.isEmpty()){
+			throw new UsernameNotFoundException("user "+username+" not found");
+		}else {
+			return (UserDetails) users.get(0);
+		}
+	}
+	
+	@Override
+	public void createAccount(User user) {
+		// check user, if exist throw exeption
+		User userEx = findUsersByUsername(user.getUsername());
+		if(userEx!=null){
+			throw new UserAlreadyExistException("User "+userEx.getUsername()+" already exist");
+		}
+		// else save user
+		save(user);
 	}
 
 }

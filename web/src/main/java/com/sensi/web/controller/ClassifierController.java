@@ -29,8 +29,7 @@ import com.sensi.service.CorpusService;
 @Controller
 public class ClassifierController {
 
-	static final Logger logger = LoggerFactory
-			.getLogger(ClassifierController.class);
+	static final Logger logger = LoggerFactory.getLogger(ClassifierController.class);
 
 	SensiClassifier sensiClassifier = null;
 	@Autowired
@@ -38,14 +37,12 @@ public class ClassifierController {
 
 	@PostConstruct
 	private void initialize() {
-		sensiClassifier = new SensiClassifier(corpusService.findCorpuses(),
-				"weka.classifiers.trees.J48");
+		sensiClassifier = new SensiClassifier(corpusService.findCorpuses());
 		sensiClassifier.train();
 	}
 
 	@RequestMapping(value = "classify", method = { RequestMethod.POST })
-	public ModelAndView classify(
-			@RequestParam(value = "text", required = true) String text) {
+	public ModelAndView classify(@RequestParam(value = "text", required = true) String text) {
 		ModelAndView view = new ModelAndView("redirect:/");
 		if (text != null && text.length() > 0) {
 			view.setViewName("home");

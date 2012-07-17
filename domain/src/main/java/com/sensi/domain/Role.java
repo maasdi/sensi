@@ -15,6 +15,8 @@ import org.springframework.security.core.GrantedAuthority;
 @Table(name="roles")
 public class Role implements GrantedAuthority, Serializable {
 
+	private static final long serialVersionUID = 8078524154512529379L;
+
 	@Id
 	@GeneratedValue
 	@Column(name="roles_id")

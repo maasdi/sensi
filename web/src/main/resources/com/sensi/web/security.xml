@@ -8,27 +8,19 @@
 	<http pattern="/resources/**" security="none" />
 	
 	<http auto-config="true" >
-		<form-login login-page="/signin" authentication-failure-url="/signin?param.error=true" default-target-url="/" login-processing-url="/signin/authenticate" />
+		<form-login login-page="/signin" authentication-failure-url="/signin?error=true" default-target-url="/" login-processing-url="/signin/authenticate" />
 		<logout logout-success-url="/signin" logout-url="/signout" delete-cookies="JSESSIONID" />
 		<intercept-url pattern="/signin" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/signup" access="ROLE_ANONYMOUS" />
 		<intercept-url pattern="/*" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/sensi/*" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 	</http>
 	
 	<authentication-manager>
-	   <authentication-provider>
-	   		<password-encoder ref="passwordEncoder" />
-			<jdbc-user-service data-source-ref="dataSource"
-			   users-by-username-query="SELECT username,password, enabled FROM users where username=?" 
-	 
-			   authorities-by-username-query="SELECT u.username, r.role_name FROM users u 
-											JOIN groups g ON g.groups_id = u._group
-											JOIN groups_roles gr ON gr.groups_id = g.groups_id
-											JOIN roles r ON r.roles_id = gr.roles_id
-											WHERE u.username = ?" 
-			/>
-	   </authentication-provider>
+	   <authentication-provider user-service-ref="userService">
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
 	</authentication-manager>
 	
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
