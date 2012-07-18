@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sensi.domain.Role;
 import com.sensi.domain.User;
-import com.sensi.domain.UserAlreadyExistException;
+import com.sensi.domain.UserExistException;
 import com.sensi.service.RoleService;
 import com.sensi.service.UserService;
 import com.sensi.web.validator.UserValidator;
@@ -47,7 +47,7 @@ public class SignUpController {
 				userService.save(user);
 				log.info("success signup");
 				return "redirect:/signup";
-			} catch (UserAlreadyExistException uae) {
+			} catch (UserExistException uae) {
 				errors.rejectValue("username", "username.exist");
 				return "signup";
 			} catch (Exception e) {

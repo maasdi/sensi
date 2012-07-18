@@ -1,6 +1,4 @@
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ include file="/common/taglibs.jsp"%>
 <div class="nav-collapse">
 	<ul class="nav pull-left">
 		<li class="active"><a href="#"> <span class="new-wrapper">

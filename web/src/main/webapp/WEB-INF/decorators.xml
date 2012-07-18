@@ -1,0 +1,15 @@
+<decorators defaultdir="/layouts">
+    <excludes>
+        <pattern>/40*.jsp</pattern>
+        <pattern>/*ajax=true*</pattern>
+        <pattern>/resources/*</pattern>
+    </excludes> 
+    <decorator name="default" page="default.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+    <decorator name="private" page="private.jsp" >
+    	<pattern>/</pattern>
+    	<pattern>/sensi/*</pattern>
+    	<pattern>/admin/*</pattern>
+    </decorator>
+</decorators>

@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/common/taglibs.jsp"%>
+
     <html>
-
         <head>
-            <title>Sensi&#160;&#187;&#160;<tiles:insertAttribute name="title" ignore="true" /></title>
+            <title>Sensi&#160;&#187;&#160;<decorator:title/></title>
 
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta http-equiv="Cache-Control" content="no-cache" />
-            <meta http-equiv="Cache-Control" content="must-revalidate" />
-            <meta http-equiv="Pragma" content="no-cache" />
-            <meta http-equiv="Expires" content="Mon, 1 Aug 1999 10:00:00 GMT" />
+            <%@ include file="/common/meta.jsp" %>
 
             <!-- Theme -->
             <link type="text/css" rel="stylesheet" href="<c:url value='/resources/styles/theme.css' />" />
@@ -25,20 +20,22 @@
 
 			<link rel="icon" href="<c:url value='/resources/images/icon/icon.gif' />" />
             <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/images/icon/icon.gif' />" />
+            
+            <decorator:head/>
         </head>
         <body>
         	<div class="navbar navbar-fixed-top">
      			<div class="navbar-inner">
                     <div class="container">
                         <a class="brand" href="<c:url value='/' />">Sensi</a>
-                        <tiles:insertAttribute name="topnav" />
+                        <%@ include  file="/common/topnav.jsp" %>
                     </div>
 				</div>
 			</div>
             <div class="container">
-            	<tiles:insertAttribute name="sidebar" />
+            	<%@ include file="/common/sidebar.jsp" %>
             	<div class="span8" background-color="#2e2e2c">
-            			<tiles:insertAttribute name="content" ignore="false" />
+            			<decorator:body/>
             	</div>
             </div>
         </body>

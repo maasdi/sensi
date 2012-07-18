@@ -39,26 +39,13 @@
 		Resolves view names to protected .jsp resources within the
 		/WEB-INF/views directory
 	-->
-	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
-	</bean>
-	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" id="tilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/layouts/layouts.xml</value>
-				<value>/WEB-INF/views/views.xml</value>
-				<!-- Scan views directory for Tiles configurations -->
-				<value>/WEB-INF/views/**/views.xml</value>
-			</list>
-		</property>
-		<property name="tilesProperties">
-			<props>
-	            <prop key="org.apache.tiles.evaluator.AttributeEvaluator">org.apache.tiles.evaluator.el.ELAttributeEvaluator</prop>
-	        </props>
-		</property>
-	</bean>
-
 	<!-- Forwards requests to the "/" resource to the "home" view -->
-	<mvc:view-controller path="/" view-name="home" />
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <mvc:view-controller path="/" view-name="home" />
 
 </beans>

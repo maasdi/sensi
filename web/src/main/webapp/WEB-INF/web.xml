@@ -40,6 +40,10 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>
     
     <filter-mapping>
         <filter-name>securityFilter</filter-name>
@@ -49,6 +53,12 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    <filter-mapping>
+    	<filter-name>sitemesh</filter-name>
+    	<url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
     
      <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
@@ -57,7 +67,7 @@
     
     <!-- Handles all requests into the application -->
     <servlet>
-        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -70,11 +80,11 @@
     
     <filter-mapping>
         <filter-name>httpMethodFilter</filter-name>
-        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
     </filter-mapping>
 
     <servlet-mapping>
-        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
              
