@@ -26,7 +26,7 @@
         	<div class="navbar navbar-fixed-top">
      			<div class="navbar-inner">
                     <div class="container">
-                        <a class="brand" href="#">Sensi</a>
+                        <a class="brand" href="<c:url value='/' />">Sensi</a>
                     </div>
 				</div>
 			</div>

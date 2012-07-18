@@ -8,13 +8,12 @@
 	<http pattern="/resources/**" security="none" />
 	
 	<http auto-config="true" >
-		<form-login login-page="/signin" authentication-failure-url="/signin?error=true" default-target-url="/" login-processing-url="/signin/authenticate" />
+		<form-login login-page="/signin" authentication-failure-url="/signin?error=true" default-target-url="/home" login-processing-url="/signin/authenticate" />
 		<logout logout-success-url="/signin" logout-url="/signout" delete-cookies="JSESSIONID" />
-		<intercept-url pattern="/signin" access="ROLE_ANONYMOUS" />
-		<intercept-url pattern="/signup" access="ROLE_ANONYMOUS" />
-		<intercept-url pattern="/*" access="ROLE_USER,ROLE_ADMIN" />
-		<intercept-url pattern="/sensi/*" access="ROLE_USER,ROLE_ADMIN" />
-		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/signin*" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/signup*" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN" />
+		<remember-me user-service-ref="userService" />
 	</http>
 	
 	<authentication-manager>

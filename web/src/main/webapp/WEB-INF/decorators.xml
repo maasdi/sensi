@@ -8,7 +8,7 @@
         <pattern>/*</pattern>
     </decorator>
     <decorator name="private" page="private.jsp" >
-    	<pattern>/</pattern>
+    	<pattern>/home</pattern>
     	<pattern>/sensi/*</pattern>
     	<pattern>/admin/*</pattern>
     </decorator>

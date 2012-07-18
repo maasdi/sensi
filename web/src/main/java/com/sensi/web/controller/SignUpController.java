@@ -1,5 +1,7 @@
 package com.sensi.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sensi.domain.Role;
 import com.sensi.domain.User;
@@ -17,7 +21,7 @@ import com.sensi.service.UserService;
 import com.sensi.web.validator.UserValidator;
 
 @Controller
-public class SignUpController {
+public class SignUpController extends BaseController {
 	
 	private static final Logger log = LoggerFactory.getLogger(SignUpController.class);
 	
@@ -35,25 +39,33 @@ public class SignUpController {
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String createAccount(User user, BindingResult errors){
+	public String createAccount(User user, BindingResult errors, HttpServletRequest request){
 		userValidator.validate(user, errors);
 		if(errors.hasErrors()){
-			log.info("error signup");
+			setError(request, "You have entered invalid data");
 			return "signup";
 		}else{
 			try {
 				Role role = roleService.findRole("ROLE_USER");
 				user.getRoles().add(role);
-				userService.save(user);
-				log.info("success signup");
+				userService.createAccount(user);
+				setMessage(request, "Your account successfull created");
 				return "redirect:/signup";
-			} catch (UserExistException uae) {
+			} catch (UserExistException ue) {
 				errors.rejectValue("username", "username.exist");
+				setError(request, "You have entered invalid data");
 				return "signup";
-			} catch (Exception e) {
+			} catch (Exception ex) {
+				log.error(ex.getMessage(),ex);
+				setError(request, "Sorry, something wrong. Please come next time");
 				return "signup";
 			}
 		}
+	}
+	
+	@RequestMapping(value="/signup/isavailable", method=RequestMethod.GET)
+	public @ResponseBody boolean isUserAvailable(@RequestParam("username") String username){
+		return userService.findUsersByUsername(username) != null;
 	}
 
 }
