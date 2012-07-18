@@ -19,8 +19,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Long countRoles() {
-		return (Long) sessionFactory.getCurrentSession().createQuery(
-				"select count(o) from Role o").uniqueResult();
+		return (Long) sessionFactory.getCurrentSession().createQuery("select count(o) from Role o").uniqueResult();
 	}
 
 	@Override
@@ -31,16 +30,14 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Role findRole(String authority) {
+	public Role findRole(String name) {
 		return (Role) sessionFactory.getCurrentSession().createQuery(
-				"select o from Role o.authority = :authority").setString(
-				"authority", authority).uniqueResult();
+				"select o from Role o where o.name = :name").setString("name", name).uniqueResult();
 	}
 
 	@Override
 	public List<Role> findRoles() {
-		return sessionFactory.getCurrentSession().createQuery(
-				"select o from Role o order by o.authority").list();
+		return sessionFactory.getCurrentSession().createQuery("select o from Role o order by o.name").list();
 	}
 
 	@Override

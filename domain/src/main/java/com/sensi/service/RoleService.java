@@ -9,7 +9,7 @@ public interface RoleService {
 	/** Role */
 	public Long countRoles();
 	
-	public Role findRole(String authority);
+	public Role findRole(String name);
 	
 	public List<Role> findRoles();
 	

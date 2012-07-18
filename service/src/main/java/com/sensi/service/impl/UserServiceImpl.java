@@ -75,9 +75,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-		List<User> users = sessionFactory.getCurrentSession().createQuery("select o from User o order by o.username").list();
+		List<User> users = sessionFactory.getCurrentSession().createQuery("select o from User o where o.username = :username").setString("username", username).list();
 		if(users == null || users.isEmpty()){
-			throw new UsernameNotFoundException("user "+username+" not found");
+			throw new UsernameNotFoundException("user " + username + " not found");
 		}else {
 			return (UserDetails) users.get(0);
 		}
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		// check user, if exist throw exeption
 		User userEx = findUsersByUsername(user.getUsername());
 		if(userEx!=null){
-			throw new UserExistException("User "+userEx.getUsername()+" already exist");
+			throw new UserExistException("User " + userEx.getUsername() + " already exist");
 		}
 		// else save user
 		save(user);
