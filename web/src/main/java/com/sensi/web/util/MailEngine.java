@@ -1,4 +1,4 @@
-package com.sensi.web.helper;
+package com.sensi.web.util;
 
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
