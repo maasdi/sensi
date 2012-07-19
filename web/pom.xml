@@ -10,9 +10,8 @@
 	<artifactId>web</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Applikasi Web</name>
+	<name>Web Application</name>
 	<properties>
-		<tiles.version>2.2.2</tiles.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<org.springframework.social.version>1.0.2.RELEASE</org.springframework.social.version>
 	</properties>
@@ -127,22 +126,6 @@
 			<groupId>opensymphony</groupId>
 			<artifactId>sitemesh</artifactId>
 			<version>${sitemesh.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-core</artifactId>
-			<version>${tiles.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-			<version>${tiles.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
