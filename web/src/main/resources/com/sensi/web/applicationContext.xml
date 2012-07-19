@@ -8,14 +8,22 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:property-placeholder location="classpath:jdbc.properties,classpath:social.properties"/>
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:social.properties</value>
+                <value>classpath:mail.properties</value>
+            </list>
+        </property>
+    </bean>
 	
 	<import resource="social.xml" />
 
 	<tx:annotation-driven/>
 
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close"
 		p:driverClassName="${jdbc.driver}"
 		p:url="${jdbc.url}"
