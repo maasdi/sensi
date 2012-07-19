@@ -2,6 +2,7 @@ package com.sensi.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.context.ServletContextAware;
+
+import com.sensi.domain.User;
+import com.sensi.web.helper.MailEngine;
 
 /**
  *
@@ -20,9 +25,11 @@ public class BaseController implements ServletContextAware {
 	
 	public static final String MESSAGES_KEY = "messages";
 	public static final String ERRORS_KEY = "errors";
-	private ServletContext servletContext;
 	
-	private MessageSourceAccessor messages;
+	private ServletContext servletContext;
+	private MessageSourceAccessor messages;	
+	private MailEngine mailEngine;
+
 	
 	@Autowired
 	public void setMessageSource(MessageSource messageSource) {
@@ -71,5 +78,62 @@ public class BaseController implements ServletContextAware {
 		errors.add(message);
 		request.getSession().setAttribute(ERRORS_KEY, errors);
 	}
+	
+	/**
+	 * Use this method to get message 
+	 * from ApplicationResources base on code
+	 * 
+	 * @param code the message key
+	 * @param locale the current locale
+	 * @return String message
+	 */
+	public String getText(String code, Locale locale){
+		return messages.getMessage(code, locale);
+	}
+	
+	/**
+	 * Use this method to get message with one argument
+	 * from ApplicationResources base on code
+	 * 
+	 * @param code the message key
+	 * @param args string argument
+	 * @param locale current locale
+	 * @return String message
+	 */
+	public String getText(String code, String args, Locale locale){
+		return messages.getMessage(code, new Object[]{args}, locale);
+	}
+	
+	/**
+	 * Use this method to get message with more than one arguments
+	 * from ApplicationResources
+	 * 
+	 * @param code the message key
+	 * @param args Array of {@link Object} as arguments
+	 * @param locale current locale
+	 * @return String message
+	 */
+	public String getText(String code, Object[] args, Locale locale){
+		return messages.getMessage(code, args, locale);
+	}
 
+	@Autowired
+	public void setMailEngine(MailEngine mailEngine) {
+		this.mailEngine = mailEngine;
+	}
+	
+	protected void sendUserMessage(User user){
+		
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		String template = "Your account has been created, here your account detail.\n" +
+				"Username : %s\n" +
+				"Password : %s\n" +
+				"\n\n Regards \n\n Sensi ";
+		
+		mailMessage.setText(user.getEmail());
+		mailMessage.setSubject("Sensi Account Created successfull");
+		mailMessage.setText(String.format(template, user.getUsername(), user.getConfirmPassword()));
+		
+		mailEngine.sendMessage(mailMessage);
+	}
 }

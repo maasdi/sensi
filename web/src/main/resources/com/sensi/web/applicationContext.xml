@@ -46,5 +46,23 @@
             </props>
         </property>
     </bean>
+    
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.host}" />
+		<property name="port" value="${mail.port}" />
+		<property name="username" value="${mail.username}" />
+		<property name="password" value="${mail.password}" />
+	 
+		<property name="javaMailProperties">
+		     <props>
+	           	<prop key="mail.smtp.auth">true</prop>
+	           	<prop key="mail.smtp.starttls.enable">true</prop>
+	       	     </props>
+		</property>
+	</bean>
+	
+	<bean id="mailEngine" class="com.sensi.web.helper.MailEngine">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
    
 </beans>
