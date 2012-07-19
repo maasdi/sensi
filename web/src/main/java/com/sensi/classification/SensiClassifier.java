@@ -131,10 +131,12 @@ public class SensiClassifier {
         }
 
         try {
-            classifier = Classifier.forName(algoritmClass, null);
-            classifier.buildClassifier(instancesFiltered);
-            evaluation = new Evaluation(instancesFiltered);
-            evaluation.evaluateModel(classifier, instancesFiltered);
+        	if(instancesFiltered.numInstances() > 0){
+                classifier = Classifier.forName(algoritmClass, null);
+                classifier.buildClassifier(instancesFiltered);
+                evaluation = new Evaluation(instancesFiltered);
+                evaluation.evaluateModel(classifier, instancesFiltered);
+        	}
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
