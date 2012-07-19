@@ -14,7 +14,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.context.ServletContextAware;
 
 import com.sensi.domain.User;
-import com.sensi.web.helper.MailEngine;
+import com.sensi.web.util.MailEngine;
 
 /**
  *
@@ -51,7 +51,7 @@ public class BaseController implements ServletContextAware {
 	 * @param request @see {@link HttpServletRequest}
 	 * @param message, message that will displayed
 	 */
-	public void setMessage( HttpServletRequest request, String message ){
+	public void addMessage( HttpServletRequest request, String message ){
 		List<String> messages = ( List<String> ) request.getSession().getAttribute( MESSAGES_KEY );
 		
 		if( messages == null ){
@@ -68,7 +68,7 @@ public class BaseController implements ServletContextAware {
 	 * @param request @see {@link HttpServletRequest}
 	 * @param message, the error message that will displayed
 	 */
-	public void setError( HttpServletRequest request, String message ){
+	public void addError( HttpServletRequest request, String message ){
 		List<String> errors = ( List<String> ) request.getSession().getAttribute( ERRORS_KEY );
 		
 		if( errors == null ){
@@ -129,7 +129,7 @@ public class BaseController implements ServletContextAware {
 				"Username : %s\n" +
 				"Password : %s\n" +
 				"\n\n Regards \n\n Sensi ";
-		
+		mailMessage.setFrom("maas.dianto@gmail.com");
 		mailMessage.setText(user.getEmail());
 		mailMessage.setSubject("Sensi Account Created successfull");
 		mailMessage.setText(String.format(template, user.getUsername(), user.getConfirmPassword()));

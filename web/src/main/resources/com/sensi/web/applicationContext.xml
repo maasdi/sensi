@@ -61,7 +61,7 @@
 		</property>
 	</bean>
 	
-	<bean id="mailEngine" class="com.sensi.web.helper.MailEngine">
+	<bean id="mailEngine" class="com.sensi.web.util.MailEngine">
 		<property name="mailSender" ref="mailSender" />
 	</bean>
    

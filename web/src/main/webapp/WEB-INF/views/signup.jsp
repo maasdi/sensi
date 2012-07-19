@@ -7,7 +7,10 @@
 	<div id="container">
 		<div class="row-fluid">
 			<div class="page-header">
-				<h3><spring:message code="label.signup.title" /></h3>
+				<h3>
+					<spring:message code="label.signup.title" />
+					<small>&nbsp;( <b><spring:message code="label.or" /> <a href="<c:url value='/signin' />"><spring:message code="label.signin" /></a> </b>)</small>
+				</h3>
 			</div>
 		</div>
 		<div class="row-fluid">
@@ -102,11 +105,6 @@
 					</fieldset>
 				</form:form>
 			</div>
-		</div>
-		<div id="extra">
-			<p>
-				Already have an account ? <a href="<c:url value='/signin' />"><spring:message code="label.signin" /></a>
-			</p>
 		</div>
 	</div>
 </body>

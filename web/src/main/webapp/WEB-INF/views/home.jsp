@@ -4,6 +4,7 @@
 		<title>Home</title>
 	</head>
 	<body>
+		<%@ include file="/common/messages.jsp" %>
 		<div class="row-fluid">
 			<div class="page-header">
 				<h3>Text Mining</h3>
