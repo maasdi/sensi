@@ -20,6 +20,8 @@ public interface UserService {
     public Long countUsers();
 
     public User findUsersByUsername(String username);
+    
+    public User findUserByEmail(String email);
 
     public Long countUsersByUsername(String username);
     

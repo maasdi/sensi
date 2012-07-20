@@ -59,6 +59,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public User findUsersByUsername(String username) {
 		return (User) sessionFactory.getCurrentSession().createQuery("select o from User o where o.username = :username").setString("username", username).uniqueResult();
 	}
+	
+	@Override
+	public User findUserByEmail(String email) {
+		return (User) sessionFactory.getCurrentSession().createQuery("select o from User o where o.email = :email").setString("email", email).uniqueResult();
+	}
 
 	@Override
 	public void save(User user) {
