@@ -14,7 +14,6 @@ mvn install
 ```
 4. Wait until maven download dependency complete and install on your local maven repo
 5. Go to web/ folder :
-
 ```
 cd web/
 ```
