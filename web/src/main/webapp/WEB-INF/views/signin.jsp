@@ -44,7 +44,7 @@
 				Don't have an account ? <a href="<c:url value='/signup' />"><spring:message code="label.signup.title" /></a>
 			</p>
 			<p>
-				Forgot password ? <a href="#">Retrieve</a>
+				Forgot password ? <a href="<c:url value='/forgot_password' />"><spring:message code="label.forgotPassword.title" /></a>
 			</p>
 		</div>
 	</div>

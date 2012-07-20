@@ -29,6 +29,7 @@ public class BaseController implements ServletContextAware {
 	private ServletContext servletContext;
 	private MessageSourceAccessor messages;	
 	private MailEngine mailEngine;
+	private SimpleMailMessage mailMessage;
 
 	
 	@Autowired
@@ -122,18 +123,26 @@ public class BaseController implements ServletContextAware {
 		this.mailEngine = mailEngine;
 	}
 	
-	protected void sendUserMessage(User user){
+	@Autowired
+	public void setMailMessage(SimpleMailMessage mailMessage) {
+		this.mailMessage = mailMessage;
+	}
+	
+	/**
+	 * the convenience method to send email to User
+	 * 
+	 * @param user the User
+	 * @param message the message to send
+	 * @param subject email subject
+	 */
+	protected void sendUserMessage(User user, String message, String subject){
 		
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		String template = "Your account has been created, here your account detail.\n" +
-				"Username : %s\n" +
-				"Password : %s\n" +
-				"\n\n Regards \n\n Sensi ";
-		mailMessage.setFrom("maas.dianto@gmail.com");
-		mailMessage.setText(user.getEmail());
-		mailMessage.setSubject("Sensi Account Created successfull");
-		mailMessage.setText(String.format(template, user.getUsername(), user.getConfirmPassword()));
+		SimpleMailMessage mailMessage = new SimpleMailMessage(this.mailMessage);
+		mailMessage.setTo(user.getEmail());
+		mailMessage.setSubject(subject);
+		mailMessage.setText(message);
 		
 		mailEngine.sendMessage(mailMessage);
 	}
+	
 }

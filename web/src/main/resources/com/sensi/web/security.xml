@@ -12,6 +12,7 @@
 		<logout logout-success-url="/signin" logout-url="/signout" delete-cookies="JSESSIONID" />
 		<intercept-url pattern="/signin*" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/signup*" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/forgot_password*" access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN" />
 		<remember-me user-service-ref="userService" />
 	</http>

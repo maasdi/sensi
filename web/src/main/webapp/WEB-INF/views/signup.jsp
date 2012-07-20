@@ -16,7 +16,6 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<form:form commandName="user" method="post" action="signup" cssClass="form-horizontal">
-					<%@ include file="/common/messages.jsp" %>
 					<form:hidden path="id" />
 					<fieldset>
 						<spring:bind path="username">

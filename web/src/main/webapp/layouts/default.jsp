@@ -31,6 +31,7 @@
 				</div>
 			</div>
             <div class="container">
+            	<%@ include file="/common/messages.jsp" %>
             	<decorator:body/>
             </div>
         </body>

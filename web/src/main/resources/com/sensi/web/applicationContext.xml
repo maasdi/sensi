@@ -61,6 +61,10 @@
 		</property>
 	</bean>
 	
+	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage" >
+		<property name="from" value="${mail.default.from}" />
+	</bean>
+	
 	<bean id="mailEngine" class="com.sensi.web.util.MailEngine">
 		<property name="mailSender" ref="mailSender" />
 	</bean>

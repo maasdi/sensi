@@ -46,7 +46,11 @@ public class SignUpController extends BaseController {
 		// validate
 		userValidator.validate(user, errors);
 		if(errors.hasErrors()){
-			addError(request, "You have entered invalid data");
+			return "signup";
+		}
+		
+		if(userService.findUserByEmail(user.getEmail()) != null){
+			errors.rejectValue("email", "email.exist");
 			return "signup";
 		}
 		
@@ -55,7 +59,6 @@ public class SignUpController extends BaseController {
 			userService.createAccount(user);
 		} catch (UserExistException ue) {
 			errors.rejectValue("username", "username.exist");
-			addError(request, "You have entered invalid data");
 			return "signup";
 		} catch (Exception ex) {
 			log.error(ex.getMessage(),ex);
@@ -72,7 +75,11 @@ public class SignUpController extends BaseController {
 		
 		// send an account detail
 		try {
-			sendUserMessage(user);
+			String template = "Your account has been created, here your account detail.\n" +
+					"Username : %s\n" +
+					"Password : %s\n" +
+					"\n\n Regards \n\n Sensi ";
+			sendUserMessage(user, String.format(template, user.getUsername(), user.getConfirmPassword()), "Account success created");
 		} catch (MailException me) {
 			log.error(me.getMessage(), me);
 		}
