@@ -35,7 +35,8 @@
             <div class="container">
             	<%@ include file="/common/sidebar.jsp" %>
             	<div class="span8" background-color="#2e2e2c">
-            			<decorator:body/>
+            		<%@ include file="/common/messages.jsp" %>
+            		<decorator:body/>
             	</div>
             </div>
         </body>

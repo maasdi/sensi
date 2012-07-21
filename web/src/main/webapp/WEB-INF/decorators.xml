@@ -9,7 +9,6 @@
     </decorator>
     <decorator name="private" page="private.jsp" >
     	<pattern>/home</pattern>
-    	<pattern>/sensi/*</pattern>
-    	<pattern>/admin/*</pattern>
+    	<pattern>/*/*</pattern>
     </decorator>
 </decorators>

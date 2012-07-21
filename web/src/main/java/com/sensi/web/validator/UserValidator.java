@@ -29,17 +29,37 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
-		ValidationUtils.rejectIfEmpty(errors, "username", "username.required");
-		ValidationUtils.rejectIfEmpty(errors, "password", "password.required");
-		// confirm password validation
+		
+		if(!StringUtils.hasText(user.getUsername())){
+			errors.rejectValue("username", "username.required");
+		}
+		
+		if(!StringUtils.hasText(user.getPassword())){
+			errors.rejectValue("password", "password.required");
+		}
+		
+		/**
+		 * confirm password validation
+		 * if confirm password = "false" then don't validate
+		 */
 		if(!StringUtils.hasText(user.getConfirmPassword())){
 			errors.rejectValue("confirmPassword", "confirmPassword.required");
-		}else if (user.getPassword() != null && !user.getPassword().equals(user.getConfirmPassword())){
+		}else if (user.getPassword() != null && !user.getConfirmPassword().equals("false") && !user.getPassword().equals(user.getConfirmPassword())){
 			errors.rejectValue("confirmPassword", "confirmPassword.invalid");
 		}
-		ValidationUtils.rejectIfEmpty(errors, "firstName", "firstName.required");
-		ValidationUtils.rejectIfEmpty(errors, "lastName", "lastName.required");
-		ValidationUtils.rejectIfEmpty(errors, "gender", "gender.required");
+		
+		if(!StringUtils.hasText(user.getFirstName())){
+			errors.rejectValue("firstName", "firstName.required");
+		}
+		
+		if(!StringUtils.hasText(user.getLastName())){
+			errors.rejectValue("lastName", "lastName.required");
+		}
+		
+		if(!StringUtils.hasText(user.getGender())){
+			errors.rejectValue("gender", "gender.required");
+		}
+
 		// email validation
 		if(!StringUtils.hasText(user.getEmail())){
 			errors.rejectValue("email", "email.required");

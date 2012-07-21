@@ -40,7 +40,7 @@
 		
 		<li>
 			<figure>
-				<a href="<c:url value='/user' />"> <i class="icon-user"></i>Profile
+				<a href="<c:url value='/user/profile' />"> <i class="icon-user"></i>Profile
 				</a>
 			</figure>
 		</li>
