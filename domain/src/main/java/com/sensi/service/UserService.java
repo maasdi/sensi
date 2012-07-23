@@ -16,6 +16,8 @@ public interface UserService {
     public User findUser(Long id);
 
     public List<User> findUsers();
+    
+    public List<User> findUsers(int start, int end);
 
     public Long countUsers();
 

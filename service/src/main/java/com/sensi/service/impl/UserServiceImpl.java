@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public List<User> findUsers() {
 		return sessionFactory.getCurrentSession().createQuery("select o from User o order by o.username").list();
 	}
+	
+	@Override
+	public List<User> findUsers(int start, int end) {	
+		return sessionFactory.getCurrentSession().createQuery("select o from User o order by o.username").setFirstResult(start).setMaxResults(end).list();
+	}
 
 	@Override
 	public User findUsersByUsername(String username) {
