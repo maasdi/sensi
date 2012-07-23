@@ -21,7 +21,14 @@
 				</a>
 			</figure>
 		</li>
-		<security:authorize ifAllGranted="ROLE_ADMIN">
+		<security:authorize ifAnyGranted="ROLE_ADMIN"	>
+			<li>
+				<figure>
+					<a href="<c:url value='/user/list' />"> <i class="icon-tweet"></i>Users</a>
+				</figure>
+			</li>
+		</security:authorize>
+		<security:authorize ifAnyGranted="ROLE_ADMIN">
 			<li class="dropper">
 			<figure>
 				<i class="icon-circle-arrow-right"></i>Corpus &nbsp;&rsaquo;
