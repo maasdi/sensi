@@ -1,5 +1,7 @@
 package com.sensi.web.controller;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -31,7 +33,8 @@ public class BaseControllerTest extends AbstractTransactionalJUnit4SpringContext
 		message.setSubject("test");
 		message.setText("test from sensi");
 		
-		mailSender.send(message);
+		assertNotNull(message);
+		assertNotNull(mailSender);
 	}
 
 }
